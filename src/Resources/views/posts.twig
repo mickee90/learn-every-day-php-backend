@@ -1,0 +1,25 @@
+{% extends "skeleton.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <div id="wall">
+    {% for post in posts %}
+        <div class="post">
+            <div class="image_container">
+                <div class="image">
+                    {% if post.multiple_images is same as (true) %}<div class="multiple_image_icon"><img src='/Resources/images/multiple_images.png' /></div>{% endif %}
+                    <img src="{{ post.main_image.url }}" />
+                </div>
+            </div>
+            <div class="text_container">
+                <div class="header"><span class="category">Kategori</span><span class="published float_right">{{ post.created|date('d D') }}</span></div>
+                <div class="title">{{ post.title }}</div>
+                <div class="ingress">{{ post.ingress }}</div>
+                <div class="content">{{ post.content|raw }}</div>
+                <div class="float_right"><a href="/post/view/{{ post.id }}">Läs mer</a></div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

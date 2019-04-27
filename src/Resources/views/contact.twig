@@ -1,0 +1,28 @@
+{% extends "skeleton.twig" %}
+
+{% block title %}{{ h1 }}{% endblock %}
+
+{% block content %}
+    <h3>En digital version av de fysiska anslagstavlorna</h3>
+    <div class="text_container">
+        Vid frågor eller önskemål kan ni skicka ett meddelande till oss via formuläret nedan.<br><br>
+
+        <form id="contact_form" method="POST" action="">
+            <div class="input_container">
+                <label>E-post*</label>
+                <input type="email" name="email" placeholder="E-post" required />
+            </div>
+            <div class="input_container">
+                <label>Namn*</label>
+                <input type="text" name="name" placeholder="Namn" required />
+            </div>
+            <div class="input_container">
+                <label>Meddelande*</label>
+                <textarea name="content" id="ck_editor" required></textarea>
+            </div>
+            <div class="input_container">
+                <div class="btn js-btn" data-task='Contact.sendForm'>Skicka</div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

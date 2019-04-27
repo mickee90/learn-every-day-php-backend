@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpAnalysisConfiguration" call_tree_analysis_depth="0" />
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/src/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/src/vendor/slim/pdo" />
+      <path value="$PROJECT_DIR$/src/vendor/composer" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/src/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-loader" />
+      <path value="$PROJECT_DIR$/src/vendor/container-interop/container-interop" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-stdlib" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-view" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-eventmanager" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-servicemanager" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-json" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-http" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-inputfilter" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-hydrator" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-validator" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-paginator" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-config" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-cache" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-form" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-mvc" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-router" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-filter" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-modulemanager" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-uri" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-escaper" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/src/vendor/zendframework/zend-authentication" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/contracts" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/doctrine-module" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/reflection" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/doctrine-orm-module" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/src/vendor/twig/extensions" />
+    </include_path>
+  </component>
+</project>

@@ -1,0 +1,21 @@
+{% extends "skeleton.twig" %}
+
+{% block title %}{{ h1 }}{% endblock %}
+
+{% block content %}
+    <div id="login_container">
+        <form id="login_user_form" method="POST" action="">
+            <div class="input_container">
+                <label>Användarnamn*</label>
+                <input class="form_input" type="text" name="username" placeholder="Användarnamn" value="" required />
+            </div>
+            <div class="input_container">
+                <label>Lösenord*</label>
+                <input class="form_input" type="password" name="password" value="" required />
+            </div>
+            <div class="input_container">
+                <div class="btn js-btn" data-task="User.loginForm">Logga in</div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

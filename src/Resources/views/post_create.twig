@@ -1,0 +1,65 @@
+{% extends "skeleton.twig" %}
+
+{% block extend_head %}
+    <style type="text/css">
+
+    </style>
+    <script type="javascript">
+		$(document).ready(function() {
+			alert('hej');
+		})
+    </script>
+{% endblock %}
+
+{% block title %} {{ h1 }} {% endblock %}
+
+{% block content %}
+    <div id="post_create">
+        <form id="create_post_form" method="POST" action="">
+            <div class="col_6">
+
+            <div class="input_container">
+                <label>Title*</label>
+                <input class="form_input" type="text" name="title" placeholder="Title" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Ingress*</label>
+                <input class="form_input" type="text" name="ingress" placeholder="Ingress" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Text*</label>
+                <textarea class="form_input" name="content" required id="ck_editor"></textarea>
+            </div>
+
+            <div class="input_container">
+                <label>Deadline*</label>
+                <input class="form_input" type="date" name="deadline" placeholder="Deadline" value="" required id="datepicker" autocomplete="off" />
+            </div>
+
+            <div class="input_container">
+                <label>E-mail*</label>
+                <input class="form_input" type="text" name="email" placeholder="E-mail" value="{{ user.email }}" required />
+            </div>
+
+            <div class="input_container">
+                <label>Telefon*</label>
+                <input class="form_input" type="text" name="phone" placeholder="Telefon" value="{{ user.phone }}" required />
+            </div>
+            </div>
+            <div class="col_6">
+
+            <div class="input_container">
+                <input class="form_input" type="hidden" name="user_id" value="{{ user.id }}" readonly required />
+                <div class="btn js-btn" data-task="Post.create">Skapa</div>
+            </div>
+                <div class="image_container">
+                    <div id="image_upload_container">
+                        <input type="file" name="images" id="image_uploader" accept="image/png, image/jpeg" multiple />
+                    </div>
+                    <div id="image_list"></div>
+                </div>
+        </form>
+    </div>
+{% endblock %}

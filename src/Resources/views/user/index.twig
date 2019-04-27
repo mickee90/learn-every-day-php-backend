@@ -1,0 +1,145 @@
+{% extends "skeleton.twig" %}
+
+{% block title %}<b>{{ h1 }}</b>{% endblock %}
+
+{% block content %}
+    <div>
+    <div class="col_2 cloud">
+        <div class="col_6">
+            <div class="input_container">
+                <label>Användarnamn</label>
+                {{ user.username }}
+            </div>
+            <div class="input_container">
+                <label>Namn</label>
+                {{ user.first_name }} {{ user.last_name }}
+            </div>
+            <div class="input_container">
+                <label>Kontakt e-mail</label>
+                {{ user.email }}
+            </div>
+            <div class="input_container">
+                <label>Telefonnummer</label>
+                {{ user.phone }}
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="input_container">
+                <label>Adress</label>
+                {{ user.address }}
+            </div>
+            <div class="input_container">
+                <label>Postnummer</label>
+                {{ user.zip_code }}
+            </div>
+            <div class="input_container">
+                <label>Ort</label>
+                {{ user.city }}
+            </div>
+        </div>
+
+        <div class="button_container"><a class="float_right" href="/user/edit/{{ user.id }}">Redigera</a></div>
+    </div>
+    <div class="col_10 grid-item">
+        <div class="cloud">
+            <div class="header">Historik</div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Rubrik</th>
+                    <th>Deadline</th>
+                    <th>Skapad</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in user.history %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.deadline }}</td>
+                        <td>{{ post.created }}</td>
+                        <td><a href="/post/view/{{ post.id }}">Visa</a></td>
+                        <td><a href="/post/edit/{{ post.id }}">Redigera</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="cloud">
+            <div class="header">Publicerade</div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Rubrik</th>
+                    <th>Deadline</th>
+                    <th>Skapad</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in user.published %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.deadline }}</td>
+                        <td>{{ post.created }}</td>
+                        <td><a href="/post/view/{{ post.id }}">Visa</a></td>
+                        <td><a href="/post/edit/{{ post.id }}">Redigera</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="cloud">
+            <div class="header">Opublicerade</div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Rubrik</th>
+                    <th>Deadline</th>
+                    <th>Skapad</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in user.unpublished %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.deadline }}</td>
+                        <td>{{ post.created }}</td>
+                        <td><a href="/post/view/{{ post.id }}">Visa</a></td>
+                        <td><a href="/post/edit/{{ post.id }}">Redigera</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="cloud">
+            <div class="header">Raderade</div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Rubrik</th>
+                    <th>Deadline</th>
+                    <th>Skapad</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in user.deleted %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.deadline }}</td>
+                        <td>{{ post.created }}</td>
+                        <td><a href="/post/view/{{ post.id }}">Visa</a></td>
+                        <td><a href="/post/edit/{{ post.id }}">Redigera</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

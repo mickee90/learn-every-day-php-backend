@@ -1,0 +1,52 @@
+{% extends "skeleton.twig" %}
+
+{% block extend_head %}
+    <style type="text/css">
+
+    </style>
+{% endblock %}
+
+{% block title %} {{ h1 }} {% endblock %}
+
+{% block content %}
+    <div id="post">
+        <div class="col_6">
+            <div class="ingress">Upplagd av: {{ user.first_name|capitalize }} {{ user.last_name|capitalize }} den {{ post.created|date("Y-m-d H:m") }}</div>
+            <div class="content">{{ post.content|raw }}</div>
+        </div>
+        <div class="col_6">
+            <div id="contact_container">
+                <div class="container">Telefon: {{ post.phone }}</div>
+                <div class="btn js-btn" data-task="Post.showForm">Skicka meddelande</div>
+                <form id="post_message_form" method="POST">
+                    <div class="input_container">
+                        <label>Namn*</label>
+                        <input type="text" name="name" placeholder="Namn" required />
+                    </div>
+                    <div class="input_container">
+                        <label>E-post*</label>
+                        <input type="email" name="email" placeholder="E-post" required />
+                    </div>
+                    <div class="input_container">
+                        <label>Telefonnummer</label>
+                        <input type="text" name="phone" placeholder="Telefonnummer" />
+                    </div>
+                    <div class="input_container">
+                        <label>Text*</label>
+                        <textarea name="content" cols="50" rows="20" required></textarea>
+                    </div>
+                    <div class="input_container">
+                        <input type="hidden" name="post_id" value="{{ post.id }}" readonly required />
+                        <div class="btn js-btn" data-task='Post.sendMessage'>Skicka</div>
+                    </div>
+                </form>
+            </div>
+            <div id="main_image"></div>
+            <ul id="image_list">
+                {% for image in post.images %}
+                    <li><img src="{{ image.url }}" alt="{{ img.real_name }}" /></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

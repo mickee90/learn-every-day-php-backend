@@ -1,0 +1,10 @@
+{
+    "require": {
+        "twig/twig": "^2.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "psr/log": "^1.0",
+        "slim/pdo": "~1.10",
+        "doctrine/doctrine-orm-module": "^2.1",
+        "twig/extensions": "^1.5"
+    }
+}

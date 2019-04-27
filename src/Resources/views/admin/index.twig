@@ -1,0 +1,105 @@
+{% extends "skeleton.twig" %}
+
+{% block title %}{{ h1 }}{% endblock %}
+
+{% block content %}
+    <div class="col_12">
+        <div class="col_6">
+            <tr class="text_container">
+                <h3>10 senaste inläggen</h3>
+                <table>
+                    <thead>
+                    <th>Rubrik</th>
+                    <th>Ingress</th>
+                    <th>Skapare</th>
+                    <th>Datum</th>
+                    <th></th>
+                    </thead>
+                    <tbody>
+                    {% for post in published_posts %}
+                        <tr>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.ingress }}</td>
+                            <td>{{ post.user.username }}</td>
+                            <td>{{ post.created }}</td>
+                            <td><a href="/post/view/{{ post.id }}" class="dark">Läs mer</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        <div class="col_6">
+            <div class="text_container">
+                10 senaste inläggen att granska
+            </div>
+            <table>
+                <thead>
+                <th>Rubrik</th>
+                <th>Ingress</th>
+                <th>Skapare</th>
+                <th>Datum</th>
+                <th></th>
+                </thead>
+                <tbody>
+                {% for post in unpublished_posts %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.ingress }}</td>
+                        <td>{{ post.user.username }}</td>
+                        <td>{{ post.created }}</td>
+                        <td><a href="/post/view/{{ post.id }}" class="dark">Läs mer</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col_12 divider"></div>
+
+    <div class="col_12">
+        <div class="col_6">
+            <div class="text_container">
+                <h3>10 senaste användarna</h3>
+                <table id="list_users">
+                    <thead>
+                    <tr>
+                        <th>Kontotyp</th>
+                        <th>Användarnamn</th>
+                        <th>Namn</th>
+                        <th>Email</th>
+                        <th>Inlägg</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td data-sort_by="username">{{ user.type_name }}</td>
+                            <td data-sort_by="username">{{ user.username }}</td>
+                            <td data-sort_by="name">{{ user.first_name }} {{ user.last_name }}</td>
+                            <td data-sort_by="email">{{ user.email }}</td>
+                            <td data-sort_by="email">{{ user.nr_of_posts }}</td>
+                            <td><a href="/user/edit/{{ user.id }}" class="dark">Redigera</a></td>
+                            <td><a href="/user/view/{{ user.id }}" class="dark">Visa</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="/user/listAll">Lista alla</a>
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="text_container">
+                Välj din ort nedan för att se vad som händer just där du bor!
+                Välj din ort nedan för att se vad som händer just där du bor!
+                Välj din ort nedan för att se vad som händer just där du bor!
+                Välj din ort nedan för att se vad som händer just där du bor!
+                Välj din ort nedan för att se vad som händer just där du bor!
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

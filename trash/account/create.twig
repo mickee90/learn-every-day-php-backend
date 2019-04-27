@@ -1,0 +1,64 @@
+{% extends "skeleton.twig" %}
+
+{% block title %}{{ h1 }}{% endblock %}
+
+{% block content %}
+    <div id="login_container">
+        <form id="create_user_form" method="POST" action="">
+            <div class="input_container">
+                <label>Användarnamn*</label>
+                <input type="text" name="username" placeholder="Användarnamn" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Förnamn*</label>
+                <input type="text" name="first_name" placeholder="Förnamn" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Efternamn*</label>
+                <input type="text" name="last_name" placeholder="Efternamn" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Adress*</label>
+                <input type="text" name="address" placeholder="Adress" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Postnummer*</label>
+                <input type="text" name="zip_code" placeholder="Postnummer" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Ort*</label>
+                <input type="text" name="city" placeholder="Ort" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Kontakt E-post*</label>
+                <input type="text" name="email" placeholder="E-post" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Telefon</label>
+                <input type="text" name="phone" placeholder="Telefon" value="" />
+            </div>
+
+            <div class="input_container">
+                <label>Lösenord*</label>
+                <input type="password" name="password_1" value="" required />
+            </div>
+
+            <div class="input_container">
+                <label>Verifiera lösenord*</label>
+                <input type="password" name="password_2" value="" required />
+            </div>
+
+            <div class="input_container">
+                <input type="submit" name="submit" value="Skapa konto" class="btn" />
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

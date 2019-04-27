@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <title>Webbtavlan</title>
+
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />-->
+        <link rel="stylesheet" type="text/css" href="{{ css('main.css') }}" />
+        <!--<script src="//cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>-->
+        <!--<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>-->
+    {% endblock %}
+    {% block extend_head %}{% endblock %}
+</head>
+<body>
+<section id="header">
+    <div class="container_wrapper">
+        {% block header %}
+            <div id="logo" class="float_left"><a href="/">Webbtavlan</a></div>
+            {% include "include/main_menu.twig" %}
+            {% include menu() %}
+        {% endblock %}
+    </div>
+</section>
+<section id="content">
+    <div class="container_wrapper">
+        <h1>{% block title %} Webbtavlan {% endblock %}</h1>
+        {% include "include/flash_message.twig" %}
+        {% block content %}{% endblock %}
+    </div>
+</section>
+<section id="footer">
+    <div class="container_wrapper">
+        {% block footer %}
+            &copy; Copyright {{ "now"|date('Y', timezone="Europe/Paris") }} av
+            <a href="https://www.webbtavlan.se">Mike</a>.
+        {% endblock %}
+    </div>
+</section>
+<script data-main="{{ js('Core.js') }}" src="{{ js('require.js') }}"></script>
+{% block extend_footer %}{% endblock %}
+</body>
+</html>

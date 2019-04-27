@@ -1,0 +1,13 @@
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+RewriteCond %{HTTP:Authentication} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHENTICATION:%1]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php [L]

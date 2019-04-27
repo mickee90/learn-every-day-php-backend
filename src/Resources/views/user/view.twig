@@ -1,0 +1,150 @@
+{% extends "skeleton.twig" %}
+
+{% block title %}<b>{{ h1 }}</b>{% endblock %}
+
+{% block content %}
+    <div class="button_container"><a href="/user/edit/{{ user.id }}">Redigera</a></div>
+
+    <div id="login_container">
+        <div class="col_6">
+            <div class="col_6">
+                <div class="input_container">
+                    <label>Användarnamn</label>
+                    {{ user.username }}
+                </div>
+                <div class="input_container">
+                    <label>Namn</label>
+                    {{ user.first_name }} {{ user.last_name }}
+                </div>
+                <div class="input_container">
+                    <label>Kontakt e-mail</label>
+                    {{ user.email }}
+                </div>
+                <div class="input_container">
+                    <label>Telefonnummer</label>
+                    {{ user.phone }}
+                </div>
+            </div>
+            <div class="col_6">
+                <div class="input_container">
+                    <label>Adress</label>
+                    {{ user.address }}
+                </div>
+                <div class="input_container">
+                    <label>Postnummer</label>
+                    {{ user.zip_code }}
+                </div>
+                <div class="input_container">
+                    <label>Ort</label>
+                    {{ user.City }}
+                </div>
+            </div>
+        </div>
+        <div class="col_6">
+            <div id="tab_bar">
+                <div class="tab" data-type="history">Historik</div>
+                <div class="tab" data-type="unpublished">Opublicerade</div>
+                <div class="tab" data-type="published">Publicerade</div>
+                <div class="tab" data-type="deleted">Raderade</div>
+            </div>
+            <div id="tab_container">
+                <div class="tab_content" data-type="history">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rubrik</th>
+                                <th>Deadline</th>
+                                <th>Skapad</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in user.history %}
+                                <tr>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.deadline }}</td>
+                                    <td>{{ post.created }}</td>
+                                    <td><a href="/post/view/{{ post.id }}">Visa</a></td>
+                                    <td><a href="/post/edit/{{ post.id }}">Redigera</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab_content" data-type="unpublished">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rubrik</th>
+                                <th>Deadline</th>
+                                <th>Skapad</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in user.unpublished %}
+                                <tr>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.deadline }}</td>
+                                    <td>{{ post.created }}</td>
+                                    <td><a href="/post/view/{{ post.id }}">Visa</a></td>
+                                    <td><a href="/post/edit/{{ post.id }}">Redigera</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab_content" data-type="published">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rubrik</th>
+                                <th>Deadline</th>
+                                <th>Skapad</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in user.published %}
+                                <tr>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.deadline }}</td>
+                                    <td>{{ post.created }}</td>
+                                    <td><a href="/post/view/{{ post.id }}">Visa</a></td>
+                                    <td><a href="/post/edit/{{ post.id }}">Redigera</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab_content" data-type="deleted">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rubrik</th>
+                                <th>Deadline</th>
+                                <th>Skapad</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in user.deleted %}
+                                <tr>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.deadline }}</td>
+                                    <td>{{ post.created }}</td>
+                                    <td><a href="/post/view/{{ post.id }}">Visa</a></td>
+                                    <td><a href="/post/edit/{{ post.id }}">Redigera</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

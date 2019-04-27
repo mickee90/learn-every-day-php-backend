@@ -1,0 +1,65 @@
+{% extends "skeleton.twig" %}
+
+{% block title %}{{ h1 }}{% endblock %}
+
+{% block content %}
+    <div id="login_container">
+        <form id="edit_user_form" method="POST" action="">
+            <div class="input_container">
+                <label>Användarnamn*</label>
+                <input class="form_input" type="text" name="username" placeholder="Användarnamn" value="{{ user.username }}" required />
+            </div>
+
+            <div class="input_container">
+                <label>Förnamn*</label>
+                <input class="form_input" type="text" name="first_name" placeholder="Förnamn" value="{{ user.first_name }}" required />
+            </div>
+
+            <div class="input_container">
+                <label>Efternamn*</label>
+                <input class="form_input" type="text" name="last_name" placeholder="Efternamn" value="{{ user.last_name }}" required />
+            </div>
+
+            <div class="input_container">
+                <label>Adress*</label>
+                <input class="form_input" type="text" name="address" placeholder="Adress" value="{{ user.address }}" required />
+            </div>
+
+            <div class="input_container">
+                <label>Postnummer*</label>
+                <input class="form_input" type="text" name="zip_code" placeholder="Postnummer" value="{{ user.zip_code }}" required />
+            </div>
+
+            <div class="input_container">
+                <label>Ort*</label>
+                <input class="form_input" type="text" name="city" placeholder="Ort" value="{{ user.city }}" required />
+            </div>
+
+            <div class="input_container">
+                <label>Kontakt e-mail*</label>
+                <input class="form_input" type="email" name="email" placeholder="Kontakt e-mail" value="{{ user.email }}" required />
+            </div>
+
+            <div class="input_container">
+                <label>Telefon</label>
+                <input class="form_input" type="text" name="phone" placeholder="Telefon" value="{{ user.phone }}" />
+            </div>
+
+            <div class="input_container">
+                <label>Lösenord*</label>
+                <input class="form_input" type="password" name="password_1" value="" />
+            </div>
+
+            <div class="input_container">
+                <label>Verifiera lösenord*</label>
+                <input class="form_input" type="password" name="password_2" value="" />
+            </div>
+
+            <div class="input_container">
+                <input class="form_input" type="hidden" name="id" value="{{ user.id }}" required />
+                <div class="btn js-btn" data-task="User.editForms">Spara</div>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}
