@@ -6,6 +6,7 @@ use MN\Entities\Post;
 use MN\Services\Paginator;
 use MN\System\Repository;
 use MN\System\AutoPopulator;
+use MN\System;
 use function MN\System\db;
 use \Slim\PDO\Database as PDO;
 
@@ -16,13 +17,19 @@ class PostRepository extends Repository {
 	 * @return Post|bool
 	 */
 	public static function create($post) {
-		$exceptions = ['id', 'updated'];
+		$exceptions = ['id', 'ingress', 'updated', 'deleted'];
+		$post->uuid = System\genUUID();
 		$post->setCreated(date("Y-m-d H:i:s"));
+		//$post->created = date("Y-m-d H:i:s");
 		
 		$table_fields = self::getPrepareInsertFields($post, $exceptions);
 		$table_values = self::getPrepareInsertValues($post, $exceptions);
 		$params = self::getParamsInsertStatement($post, $exceptions);
 		
+		var_dump("INSERT INTO app_posts ($table_fields) VALUES ($table_values)");
+		print_r($params);
+		print_r($post);
+		exit;
 		$db = db()->getDb();
 		$stmt = $db->prepare("INSERT INTO app_posts ($table_fields) VALUES ($table_values)");
 		$stmt->execute($params);

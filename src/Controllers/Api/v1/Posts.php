@@ -35,6 +35,10 @@ class Posts extends Controller {
 		if(!$title = $this->request->request->get("title")) {
 			$this->response->setContent('The title is missing')->send();
 		}
+
+		// if(!$ingress = $this->request->request->get("ingress")) {
+		// 	$this->response->setIngress('The ingress is missing')->send();
+		// }
 		
 		if(!$content = $this->request->request->get("content")) {
 			$this->response->setContent('The content is missing')->send();
@@ -46,8 +50,11 @@ class Posts extends Controller {
 		
 		$post = new Post();
 		$post->title = $title;
+		// $post->ingress = $ingress;
 		$post->content = $content;
-		$post->publish_date = $publish_date;
+		var_dump($publish_date);
+		var_dump(strtotime($publish_date . " 00:00:00"));
+		$post->publish_date = date('Y-m-d H:i:s', strtotime($publish_date));
 		$post->user_id = $this->auth->user_id;
 		
 		$post = PostRepository::create($post);

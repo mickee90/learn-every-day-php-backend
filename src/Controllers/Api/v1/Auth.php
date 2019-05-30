@@ -20,7 +20,7 @@ class Auth extends Controller {
 		if(!$password = $this->request->request->get("password")) {
 			$this->response->setContent('The password is missing')->send();
 		}
-		
+
 		$user = UserRepository::login($username, $password);
 		
 		if(empty($user)) {

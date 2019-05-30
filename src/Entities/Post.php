@@ -9,6 +9,9 @@ class Post extends Model {
 	/** @var int */
 	public $id;
 	
+	/** @var string */
+	public $uuid;
+	
 	/** @var int */
 	public $user_id;
 	

@@ -163,6 +163,7 @@ class UserRepository extends Repository{
 		$exceptions = ['id', 'updated'];
 		$user->user_type_id = 3;
 		$user->uuid = System\genUUID();
+		$user->password = self::hashPass($user->password);
 		
 		$user->setCreated(date("Y-m-d H:i:s"));
 		$user->auth_token = bin2hex(random_bytes(64));

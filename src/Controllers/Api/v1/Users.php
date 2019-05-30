@@ -13,6 +13,8 @@ use function MN\System\toCamelCase;
 class Users extends Controller {
 	
 	const VALID_METHODS = ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'];
+
+	public $ignore_auth = true;
 	
 	protected function get($id) {
 		$user_repository = new UserRepository();
@@ -47,10 +49,10 @@ class Users extends Controller {
 		if(!$email = $this->request->request->get("email")) {
 			$this->response->setContent('The email is missing')->send();
 		}
-		
+		/* 
 		if(!$country_id = $this->request->request->get("country_id")) {
 			$this->response->setContent('The country is missing')->send();
-		}
+		} */
 		
 		$user = new User();
 		$user->username = $username;
@@ -58,7 +60,7 @@ class Users extends Controller {
 		$user->first_name = $first_name;
 		$user->last_name = $last_name;
 		$user->email = $email;
-		$user->country_id = $country_id;
+		$user->country_id = 1;
 		
 		$user = UserRepository::create($user);
 		
