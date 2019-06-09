@@ -52,8 +52,6 @@ class Posts extends Controller {
 		$post->title = $title;
 		// $post->ingress = $ingress;
 		$post->content = $content;
-		var_dump($publish_date);
-		var_dump(strtotime($publish_date . " 00:00:00"));
 		$post->publish_date = date('Y-m-d H:i:s', strtotime($publish_date));
 		$post->user_id = $this->auth->user_id;
 		

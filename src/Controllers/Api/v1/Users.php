@@ -16,14 +16,14 @@ class Users extends Controller {
 
 	public $ignore_auth = true;
 	
-	protected function get($id) {
+	protected function get($uuid) {
 		$user_repository = new UserRepository();
 		
-		$users = ((int)$id > 0) ? $user_repository->getById($id) : $user_repository->getAll([['deleted', ' = ', 0, '']]);
+		$users = !empty($uuid) ? $user_repository->getByUuid($uuid) : $user_repository->getAll([['deleted', ' = ', 0, '']]);
 		
 		if(empty($users)) $this->response->setStatusCode(404)->send();
 		
-		if(!is_array($users)) $users = [$users];
+		// if(!is_array($users)) $users = [$users];
 		
 		$this->response->setStatusCode(200)->setContent($users)->send();
 	}
@@ -87,10 +87,10 @@ class Users extends Controller {
 	// 	$this->response->setStatusCode(200)->setContent('Användaren är uppdaterad')->send();
 	// }
 	
-	protected function patch($id = 0) {
+	protected function patch($uuid = '') {
 		$update_props = [];
 		
-		if((int)$id == 0) $this->response->setStatusCode(404)->setContent('The Id is missing')->send();
+		if(empty($uuid)) $this->response->setStatusCode(404)->setContent('The Uuid is missing')->send();
 		
 		if($username = $this->request->request->get("username")) {
 			$update_props['username'] = $username;
@@ -118,7 +118,7 @@ class Users extends Controller {
 		
 		if(empty($update_props)) $this->response->setStatusCode(404)->setContent('Props to update is missing')->send();
 		
-		$user = UserRepository::getById($id);
+		$user = UserRepository::getByUuid($uuid);
 		$user->setByProps($update_props);
 		
 		$user = UserRepository::update($user);

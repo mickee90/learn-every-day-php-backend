@@ -59,7 +59,7 @@ class UserRepository extends Repository{
 	}
 	
 	public static function setAuthTokenExpire($user_id) {
-		$token_expire = date('Y-m-d H:m:s', strtotime("+3 days"));
+		$token_expire = date('Y-m-d H:m:s', strtotime("+4 hours"));
 		$params = ['id' => $user_id, 'expire' => $token_expire];
 		
 		$db = db()->getDb();
@@ -83,6 +83,38 @@ class UserRepository extends Repository{
 			['disabled', ' = ', 0, ' AND '],
 			['banned', ' = ', 0, ' AND '],
 			['id', ' = ', $id, '']
+		]);
+		$db = db()->getDb();
+		$stmt = $db->prepare("SELECT a.*, b.name AS type_name FROM app_users a
+		JOIN app_user_type b ON a.user_type_id = b.id
+		$where
+		LIMIT 1");
+		$stmt->execute($params);
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		if(!empty($result)) {
+			$result->posts = PostRepository::getByArgs([['user_id', ' = ', $result->id, '']]);
+			/** @var User $data */
+			$data = (new AutoPopulator(User::class))
+				->setData($result)
+				->start();
+		}
+		return !empty($data) ? $data : null;
+	}
+	
+	/**
+	 * @param $uuid
+	 * @return null|User
+	 */
+	public static function getByUuid($uuid) {
+		$where = self::getPrepareWhereStatement([
+			['a.disabled', ' = ', 0, ' AND '],
+			['a.banned', ' = ', 0, ' AND '],
+			['a.uuid', ' = ', $uuid, '']
+		]);
+		$params =  self::getParamsWhereStatement([
+			['disabled', ' = ', 0, ' AND '],
+			['banned', ' = ', 0, ' AND '],
+			['uuid', ' = ', $uuid, '']
 		]);
 		$db = db()->getDb();
 		$stmt = $db->prepare("SELECT a.*, b.name AS type_name FROM app_users a
