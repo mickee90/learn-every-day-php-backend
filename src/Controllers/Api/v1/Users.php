@@ -38,6 +38,14 @@ class Users extends Controller {
 			$this->response->setContent('The password is missing')->send();
 		}
 		
+		if(!$password_2 = $this->request->request->get("password_2")) {
+			$this->response->setContent('Verify the password')->send();
+		}
+
+		if($password !== $password_2) {
+			$this->response->setContent('The passwords does not match')->send();
+		}
+		
 		if(!$first_name = $this->request->request->get("first_name")) {
 			$this->response->setContent('The first name is missing')->send();
 		}

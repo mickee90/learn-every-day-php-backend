@@ -46,6 +46,7 @@ class PostRepository extends Repository {
 		$params['id'] = $post->id;
 		
 		$db = db()->getDb();
+		// exit("UPDATE app_posts SET $update_fields WHERE id = :id");
 		$stmt = $db->prepare("UPDATE app_posts SET $update_fields WHERE id = :id");
 		$stmt->execute($params);
 		
@@ -93,7 +94,7 @@ class PostRepository extends Repository {
 		$where = count($args) > 0 ? self::getSimpleWhereStatement($args) : '';
 		$db = db()->getDb();
 		
-		$stmt = $db->query("SELECT id, title, content, publish_date as `date`, user_id FROM app_posts
+		$stmt = $db->query("SELECT id, uuid, title, content, publish_date, user_id FROM app_posts
 		$where
 		ORDER BY publish_date DESC");
 		$rows = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -259,6 +260,24 @@ class PostRepository extends Repository {
 	}
 	
 	/**
+	 * @param $uuid
+	 * @return null|Post
+	 */
+	public static function getByUuid($uuid) {
+		$db = db()->getDb();
+		$stmt = $db->prepare("SELECT * FROM app_posts WHERE uuid = ? AND deleted = 0 LIMIT 1");
+		$stmt->execute([$uuid]);
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		if(!empty($result)) {
+			/** @var Post $data */
+			$data = (new AutoPopulator(Post::class))
+				->setData($result)
+				->start();
+		}
+		return !empty($data) ? $data : null;
+	}
+	
+	/**
 	 * @param int $id
 	 * @param int $user_id
 	 * @return null|Post
@@ -275,7 +294,33 @@ class PostRepository extends Repository {
 		$where = count($args) > 0 ? self::getSimpleWhereStatement($args) : '';
 		$db = db()->getDb();
 		
-		$stmt = $db->query("SELECT id, title, content, publish_date as `date`, user_id FROM app_posts
+		$stmt = $db->query("SELECT id, title, content, publish_date, user_id FROM app_posts
+		$where
+		ORDER BY publish_date DESC");
+		$row = $stmt->fetchObject();
+		
+		return !empty($row) ? $row : null;
+	}
+	
+	/**
+	 * @param string $uuid
+	 * @param int $user_id
+	 * @return null|Post
+	 */
+	public static function getByUuidApi($uuid, $user_id = 0) {
+		if($user_id === 0) return null;
+		
+		$args = [
+			['deleted', ' = ', 0, ' AND '],
+			['status', ' = ', 1, ' AND '],
+			['uuid', ' = "', $uuid, '" AND '],
+			['user_id', ' = ', $user_id, '']
+		];
+
+		$where = count($args) > 0 ? self::getSimpleWhereStatement($args) : '';
+		$db = db()->getDb();
+		
+		$stmt = $db->query("SELECT id, uuid, title, content, publish_date, user_id FROM app_posts
 		$where
 		ORDER BY publish_date DESC");
 		$row = $stmt->fetchObject();

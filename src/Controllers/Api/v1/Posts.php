@@ -1,5 +1,4 @@
 <?php
-
 namespace MN\Controllers\Api\v1;
 
 use MN\Entities\Post;
@@ -7,6 +6,9 @@ use MN\Controllers\Api\Controller;
 use MN\Repositories\PostRepository;
 use MN\Services\PostForm;
 use MN\Services\ApiFilter;
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 class Posts extends Controller {
 	
@@ -17,14 +19,31 @@ class Posts extends Controller {
 	// 	$this->{$method}($id);
 	// }
 	
-	protected function get($id = 0) {
+	// protected function get($id = 0) {
+	// 	$post_repository = new PostRepository();
+		
+	// 	$posts = ((int)$id > 0)
+	// 		? $post_repository->getByIdApi($id, $this->auth->user_id)
+	// 		: $post_repository->getAllApi($this->auth->user_id);
+		
+	// 	if(empty($posts)) $this->response->setStatusCode(404)->send();
+		
+	// 	if(!is_array($posts)) $posts = [$posts];
+		
+	// 	$this->response->setStatusCode(200)->setContent($posts)->send();
+	// }
+	
+	protected function get($uuid = '') {
 		$post_repository = new PostRepository();
 		
-		$posts = ((int)$id > 0)
-			? $post_repository->getByIdApi($id, $this->auth->user_id)
+		$posts = !empty($uuid)
+			? $post_repository->getByUuidApi($uuid, $this->auth->user_id)
 			: $post_repository->getAllApi($this->auth->user_id);
 		
-		if(empty($posts)) $this->response->setStatusCode(404)->send();
+		if(empty($posts)) {
+			$msg = !empty($uuid) ? 'The post was not found. Send you back to the post list' : 'No posts was found';
+			$this->response->setStatusCode(404)->setContent($msg)->send();
+		}
 		
 		if(!is_array($posts)) $posts = [$posts];
 		
@@ -65,10 +84,10 @@ class Posts extends Controller {
 	// protected function put($id = 0) {
 	// }
 	
-	protected function patch($id = 0) {
+	protected function patch($uuid = '') {
 		$update_props = [];
-		
-		if((int)$id == 0) $this->response->setStatusCode(404)->setContent('The Id is missing')->send();
+	
+		if(empty($uuid)) $this->response->setStatusCode(404)->setContent('The Id is missing')->send();
 		
 		
 		if($title = $this->request->request->get("title")) {
@@ -85,20 +104,22 @@ class Posts extends Controller {
 		
 		if(empty($update_props)) $this->response->setStatusCode(404)->setContent('Props to update is missing')->send();
 		
-		$post = PostRepository::getById($id);
-		$post->setByProps($update_props);
-		
-		$post = PostRepository::update($post);
+		// print_r($update_props);exit;
+		$update_post = PostRepository::getByUuid($uuid, $this->auth->user_id);
+		$update_post->setByProps($update_props);
+	
+		$update_post = PostRepository::update($update_post);
+		$post = PostRepository::getByUuid($uuid, $this->auth->user_id);
 		
 		if(empty($post->id)) $this->response->setContent('Something went wrong. Please try again')->send();
 		
 		$this->response->setStatusCode(200)->setContent($post)->send();
 	}
 	
-	protected function delete($id = 0) {
-		if((int)$id == 0) $this->response->setStatusCode(404)->setContent('The Id is missing')->send();
+	protected function delete($uuid = '') {
+		if(empty($uuid)) $this->response->setStatusCode(404)->setContent('The Id is missing')->send();
 		
-		$post = PostRepository::getById($id);
+		$post = PostRepository::getByUuidApi($uuid, $this->auth->user_id);
 		$post->deleted = 1;
 		$post = PostRepository::update($post);
 		
